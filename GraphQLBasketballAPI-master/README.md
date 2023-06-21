@@ -23,7 +23,7 @@ The API supports both RESTful and graphql interfaces.
 5. Write a query that returns only all players height and weight
 6. Write a query that use a fragment called stats that returns all the players stats. Use this fragment to query all players and return their playerId and stats.
 7. Write a mutation to add a new player
-8. Write a mutation to add a new player and that checks to see what the return of the query is. `... on` keyword
+8. Write a mutation to add a new player and that checks to see what the return of the query is `... on` keyword.
 9. Write a mutation that uses aliasas to add two players at once
 10. write a mutation that adds 10 rebounds to a player of your choice
 11. write a mutation that adds 10 assists, 10 blocks and 10 rebounds to a player of your choice
