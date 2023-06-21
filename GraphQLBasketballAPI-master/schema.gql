@@ -1,0 +1,52 @@
+type BaksetballPlayer {
+  playerId: Int!
+  fname: String!
+  lname: String!
+  bioMetrics: Biometric!
+  careerStats: Stats!
+}
+
+union BaksetballPlayerPlayerDoesNotExist = BaksetballPlayer | PlayerDoesNotExist
+
+type Biometric {
+  heightInches: Int!
+  weightLbs: Int!
+}
+
+type Mutation {
+  mergeStats(input: StatsInput!): BaksetballPlayerPlayerDoesNotExist!
+  addPlayer(input: NewPlayerInput!): BaksetballPlayer!
+}
+
+input NewPlayerInput {
+  fname: String!
+  lname: String!
+  heightInches: Int!
+  weightLbs: Int!
+}
+
+type PlayerDoesNotExist {
+  playerId: Int!
+  message: String!
+}
+
+type Query {
+  players(lname: String = null): [BaksetballPlayer!]!
+}
+
+type Stats {
+  shotAttempts: Int!
+  madeBaskets: Int!
+  rebounds: Int!
+  assists: Int!
+  blocks: Int!
+}
+
+input StatsInput {
+  playerId: Int!
+  shotAttempts: Int! = 0
+  madeBaskets: Int! = 0
+  rebounds: Int! = 0
+  assists: Int! = 0
+  blocks: Int! = 0
+}
