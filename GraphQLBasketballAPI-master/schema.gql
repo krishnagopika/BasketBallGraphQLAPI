@@ -16,9 +16,18 @@ type Biometric {
 type Mutation {
   mergeStats(input: StatsInput!): BaksetballPlayerPlayerDoesNotExist!
   addPlayer(input: NewPlayerInput!): BaksetballPlayer!
+  updatePlayer(input:UpdatePlayerInput!): BaksetballPlayer
 }
 
 input NewPlayerInput {
+  fname: String!
+  lname: String!
+  heightInches: Int!
+  weightLbs: Int!
+}
+
+input UpdatePlayerInput {
+  playerId:Int!
   fname: String!
   lname: String!
   heightInches: Int!

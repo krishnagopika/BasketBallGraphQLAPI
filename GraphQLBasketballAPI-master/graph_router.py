@@ -27,6 +27,14 @@ class NewPlayerInput:
     heightInches: int 
     weightLbs: int 
 
+@strawberry.input
+class UpdatePlayerInput:
+    playerId:int
+    fname: str 
+    lname: str 
+    heightInches: int 
+    weightLbs: int 
+
 def players_resolvers(lname: str | None = None) -> list[BaksetballPlayer]:
 
     if lname:
@@ -74,6 +82,32 @@ def add_player(input: NewPlayerInput) -> BaksetballPlayer:
     basketball_players[player.playerId] = player
     return player
 
+def update_player(input: UpdatePlayerInput) -> BaksetballPlayer:
+    player = BaksetballPlayer(
+        playerId=input.playerId,
+        fname=input.fname,
+        lname=input.lname,
+        careerStats=Stats(
+            assists=0,
+            madeBaskets=0,
+            rebounds=0,
+            shotAttempts=0,
+            blocks=0
+        ),
+        bioMetrics=Biometric(
+            heightInches= input.heightInches,
+            weightLbs= input.weightLbs
+        ))
+    if input.playerId:
+        p = basketball_players[input.playerId]
+        print(p)
+        p.fname=player.fname
+        p.bioMetrics=player.bioMetrics
+        p.careerStats = player.careerStats
+        p.lname=player.lname
+    player = basketball_players[input.playerId]
+    return player
+
 
 @strawberry.type
 class Query:
@@ -84,6 +118,7 @@ class Query:
 class Mutation:
     merge_stats: BaksetballPlayer | PlayerDoesNotExist = strawberry.field(resolver=merge_stats)
     add_player: BaksetballPlayer = strawberry.field(resolver=add_player)
+    update_player:BaksetballPlayer = strawberry.field(resolver=update_player)
 
 schema = strawberry.Schema(Query, Mutation)
 graphql_app = GraphQLRouter(schema)
