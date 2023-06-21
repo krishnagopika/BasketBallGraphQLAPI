@@ -32,6 +32,14 @@ input UpdatePlayerInput {
   lname: String!
   heightInches: Int!
   weightLbs: Int!
+  shotAttempts: Int!
+  madeBaskets: Int!
+  rebounds: Int!
+  assists: Int!
+  blocks: Int!
+
+
+
 }
 
 type PlayerDoesNotExist {
@@ -44,11 +52,7 @@ type Query {
 }
 
 type Stats {
-  shotAttempts: Int!
-  madeBaskets: Int!
-  rebounds: Int!
-  assists: Int!
-  blocks: Int!
+  
 }
 
 input StatsInput {

@@ -33,7 +33,13 @@ class UpdatePlayerInput:
     fname: str 
     lname: str 
     heightInches: int 
-    weightLbs: int 
+    weightLbs: int
+    shotAttempts: int
+    madeBaskets: int
+    rebounds: int
+    assists: int
+    blocks: int
+
 
 def players_resolvers(lname: str | None = None) -> list[BaksetballPlayer]:
 
@@ -88,11 +94,11 @@ def update_player(input: UpdatePlayerInput) -> BaksetballPlayer:
         fname=input.fname,
         lname=input.lname,
         careerStats=Stats(
-            assists=0,
-            madeBaskets=0,
-            rebounds=0,
-            shotAttempts=0,
-            blocks=0
+            assists=input.assists,
+            madeBaskets=input.madeBaskets,
+            rebounds=input.rebounds,
+            shotAttempts=input.shotAttempts,
+            blocks=input.blocks
         ),
         bioMetrics=Biometric(
             heightInches= input.heightInches,
